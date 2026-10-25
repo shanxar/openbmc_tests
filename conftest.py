@@ -8,7 +8,7 @@ from utils.constants import *
 def bmc():
     host=BMC_HOST+":"+HOST_HTTPS_PORT
     username=BMC_USERNAME
-    password=BMC_HOST
+    password=BMC_PASSWORD
 
     urllib3.disable_warnings(
         urllib3.exceptions.InsecureRequestWarning
