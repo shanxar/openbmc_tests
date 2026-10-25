@@ -15,11 +15,11 @@ logger=get_logger(__name__)
 def test_redfish_reboot(bmc):
     logger.info("Starting reboot test")
 
-    response=check_bmc_is_up(bmc)
-    assert response , (f"BMC not reachable ; Reboot test failed  {response.status_code}")
+    response=bmc.get(MANAGER_URI)
+    if response.status_code != 200:
+        assert False , (f"BMC not reachable ; Reboot test failed  {response.status_code}")
 
-    manager_before=bmc.get("/redfish/v1/Managers/bmc")
-    manager_data=manager_before.json()
+    manager_data=response.json()
     previous_reset_time=manager_data["LastResetTime"]
     assert previous_reset_time,("Previous Reset Time missing")
 
