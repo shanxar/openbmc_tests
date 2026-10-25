@@ -16,7 +16,7 @@ def test_redfish_reboot(bmc):
     logger.info("Starting reboot test")
 
     response=check_bmc_is_up(bmc)
-    assert True , (f"BMC not reachable ; Reboot test failed  {response.status_code}")
+    assert response , (f"BMC not reachable ; Reboot test failed  {response.status_code}")
 
     manager_before=bmc.get("/redfish/v1/Managers/bmc")
     manager_data=manager_before.json()
